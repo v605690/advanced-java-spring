@@ -1,11 +1,9 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.corespring.lab.complete;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
 public class CoreLabApplication {
     public static void main(String[] args) {
 
