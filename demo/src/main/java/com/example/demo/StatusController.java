@@ -14,16 +14,17 @@ public class StatusController {
 
     @GetMapping("/arrival")
     public String sayHello() {
-        return "spring fundamentals/hello";
+        return statusService.processStatus(PathType.HELLO);
     }
 
     @GetMapping("/departure")
     public String sayGoodbye() {
-        return "spring fundamentals/goodbye";
+        return statusService.processStatus(PathType.GOODBYE);
+
     }
 
     @GetMapping("/success")
     public String getStatus() {
-        return "spring fundamentals/success";
+        return statusService.processStatus(PathType.SUCCESS);
     }
 }
