@@ -28,4 +28,9 @@ public class LaptopConfiguration {
     public Memory Memory() {
         return new Memory(128);
     }
+
+    @Bean
+    public Adapter adapter() {
+        return new Adapter("usb-c 3.0");
+    }
 }
