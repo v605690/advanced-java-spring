@@ -23,4 +23,9 @@ public class LaptopConfiguration {
     public HardDrive hardDrive() {
         return new HardDrive("seagate");
     }
+
+    @Bean
+    public Memory Memory() {
+        return new Memory(128);
+    }
 }
