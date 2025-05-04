@@ -18,4 +18,11 @@ public class IOCDemoConfiguration {
         renderer.setGreetingProvider(provider());
         return renderer;
     }
+
+    @Bean
+    public MyCustomGreeting myCustomGreeting() {
+        MyCustomGreeting myCustomGreeting = new MyCustomGreeting();
+        myCustomGreeting.getGreeting();
+        return myCustomGreeting;
+    }
 }

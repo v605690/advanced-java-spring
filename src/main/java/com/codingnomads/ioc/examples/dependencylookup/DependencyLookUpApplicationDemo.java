@@ -13,6 +13,16 @@ public class DependencyLookUpApplicationDemo {
         SpringApplication.run(DependencyLookUpApplicationDemo.class, args);
         ApplicationContext ctx = new AnnotationConfigApplicationContext(IOCDemoConfiguration.class);
         GreetingRenderer greetingRenderer = ctx.getBean("renderer", GreetingRenderer.class);
+//        GreetingRenderer greetingRenderer = new StandardOutGreetingRenderer();
+//
+//        greetingRenderer.setGreetingProvider(new CodingNomadsGreetingProvider());
+
         greetingRenderer.render();
+
+        MyCustomGreeting myCustomGreeting = ctx.getBean("myCustomGreeting", MyCustomGreeting.class);
+        //System.out.println(myCustomGreeting.getGreeting());
+        greetingRenderer.setGreetingProvider(myCustomGreeting);
+        greetingRenderer.render();
+
     }
 }
