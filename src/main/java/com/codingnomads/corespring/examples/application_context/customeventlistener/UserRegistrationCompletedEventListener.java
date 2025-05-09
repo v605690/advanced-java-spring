@@ -10,6 +10,6 @@ public class UserRegistrationCompletedEventListener implements ApplicationListen
     @Override
     public void onApplicationEvent(UserRegistrationCompletedEvent event) {
         System.out.println("-----Received UserRegistrationCompletedEvent-----");
-        System.out.println("-----Sending Email To: " + event.getMessage() + "-----");
+        System.out.println("-----Sending Message: " + event.getMessage() + "-----");
     }
 }
