@@ -10,6 +10,13 @@ import org.springframework.context.annotation.Configuration;
 public class SpringBeansDemoConfig {
     @Bean
     public Address address() {
-        return new Address("Main Street", 1500);
+        return new Address("Main Street,", 1500);
+    }
+
+    @Bean
+    public Contact contact() {
+        return new Contact("johndoe@gmail.com", "123.456.7890");
     }
 }
+
+
