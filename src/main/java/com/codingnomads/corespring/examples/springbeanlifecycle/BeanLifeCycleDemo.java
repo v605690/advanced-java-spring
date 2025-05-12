@@ -9,6 +9,8 @@ public class BeanLifeCycleDemo {
         ctx.register(BeanLifeCycleConfig.class);
         ctx.refresh();
         final SpringBean springBean = ctx.getBean(SpringBean.class);
+        //final SpringBean springBean2 = ctx.getBean(SpringBean.class);
+        final MyCustomSpringBean myCustomSpringBean = ctx.getBean(MyCustomSpringBean.class);
         ctx.close();
     }
 }
