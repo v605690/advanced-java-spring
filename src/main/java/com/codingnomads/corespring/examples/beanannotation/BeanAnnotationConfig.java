@@ -11,4 +11,9 @@ public class BeanAnnotationConfig {
     public SampleBean sampleBean() {
         return new SampleBean();
     }
+
+    @Bean(initMethod = "init", destroyMethod = "cleanup", name = "second_bean")
+    public SampleBean secondBean() {
+        return new SampleBean();
+    }
 }
