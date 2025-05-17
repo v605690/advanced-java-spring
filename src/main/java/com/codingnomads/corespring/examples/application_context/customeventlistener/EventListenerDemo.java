@@ -2,16 +2,22 @@
 package com.codingnomads.corespring.examples.application_context.customeventlistener;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class EventListenerDemo implements CommandLineRunner {
 
     private final UserRegistrationCompletedEventPublisher userRegistrationCompletedEventPublisher;
+
+    @Autowired
+    public EventListenerDemo(UserRegistrationCompletedEventPublisher userRegistrationCompletedEventPublisher) {
+        this.userRegistrationCompletedEventPublisher = userRegistrationCompletedEventPublisher;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(EventListenerDemo.class, args);
