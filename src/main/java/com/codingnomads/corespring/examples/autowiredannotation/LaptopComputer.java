@@ -1,4 +1,3 @@
-/* CodingNomads (C)2024 */
 package com.codingnomads.corespring.examples.autowiredannotation;
 
 import lombok.ToString;
@@ -8,11 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ToString
-public class DesktopComputer {
+public class LaptopComputer {
 
     @Autowired
-    @Qualifier("radeon") private VideoCard videoCard;
+    @Qualifier("geforce")
+    private VideoCard videoCard;
 
     @Autowired
-    private USBDrive usbDrive;
+    private SSD ssd;
 }
