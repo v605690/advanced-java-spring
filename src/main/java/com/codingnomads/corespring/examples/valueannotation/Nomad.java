@@ -36,22 +36,22 @@ public class Nomad {
     @Value("#{${database.values}}")
     private Map<String, String> databaseValues;
 
-    @Value("${bear.version}}")
+    @Value("${bear.version}")
     private String bearVersion;
 
-    @Value("${bear.name}}")
+    @Value("${bear.name}")
     private String bearName;
 
-    @Value("${bear.date}}")
+    @Value("${bear.date}")
     private String bearDate;
 
-    @Value("${docker.version}}")
+    @Value("${docker.version}")
     private String dockerVersion;
 
-    @Value("${docker.name}}")
+    @Value("${docker.name}")
     private String dockerName;
 
-    @Value("${docker.engine}}")
+    @Value("${docker.engine}")
     private String dockerEngine;
 
     public String nomadIdentity() {
