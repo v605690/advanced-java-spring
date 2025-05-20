@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="s1" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="JUDAH"/>
+        <property name="song" value="Beatitudes"/>
+    </bean>
+    <bean id="s2" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="JUDAH &amp; the Lion"/>
+        <property name="song" value="Is What It Is"/>
+    </bean>
+    <bean id="s3" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="Angels and Airwaves"/>
+        <property name="song" value="The Score Evolved"/>
+    </bean>
+    <bean id="s4" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="Coldplay"/>
+        <property name="song" value="Man in The Moon"/>
+        </bean>
+    <bean id="s5" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="The Killers"/>
+        <property name="song" value="Dying Breed"/>
+        </bean>
+    <bean id="s6" class="com.codingnomads.corespring.lab.PlayerList">
+        <property name="group" value="Andrew W.K"/>
+        <property name="song" value="We Want Fun"/>
+    </bean>
+</beans>

@@ -1,6 +1,8 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.corespring.lab.complete;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -10,6 +12,7 @@ public class CoreLabApplication {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(CoreLabConfig.class);
 
         Turntable turntable = ctx.getBean(Turntable.class);
+        System.out.println(turntable);
 
         System.out.println("Time to sit down, relax, and listen to some records on my trusty " + turntable.getMake()
                 + " " + turntable.getModel() + " turntable.");
