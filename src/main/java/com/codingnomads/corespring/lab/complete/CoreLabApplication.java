@@ -6,10 +6,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@SpringBootApplication
 public class CoreLabApplication {
     public static void main(String[] args) {
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(CoreLabConfig.class);
+      //  ApplicationContext ctx = new AnnotationConfigApplicationContext(CoreLabConfig.class);
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.getEnvironment().setActiveProfiles("PC");
+        ctx.register(CoreLabConfig.class);
+        ctx.refresh();
+
 
         Turntable turntable = ctx.getBean(Turntable.class);
         System.out.println(turntable);
