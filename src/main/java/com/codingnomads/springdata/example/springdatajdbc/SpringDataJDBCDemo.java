@@ -24,12 +24,29 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
     public void run(String... strings) {
 
         try {
+            jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS departments (department_id BIGINT AUTO_INCREMENT PRIMARY KEY,"
+                            + "department_name VARCHAR(255) NOT NULL);");
+
             // create employee table using the JdbcTemplate method "execute"
             jdbcTemplate.execute("CREATE TABLE employees (id BIGINT AUTO_INCREMENT PRIMARY KEY,"
                     + "first_name VARCHAR(255) NOT NULL,last_name  VARCHAR(255) NOT NULL);");
         } catch (Exception e) {
             // nothing
         }
+
+        List<String> departNames = Stream.of("marketing", "finance", "human resources", "IT", "sales", "engineering")
+                .collect(Collectors.toList());
+
+        for (String name : departNames) {
+            jdbcTemplate.execute(
+                    String.format("INSERT INTO departments(department_name) VALUES ('%s')", name));
+        }
+
+        jdbcTemplate.query("SELECT department_id, department_name FROM departments", (rs, rowNum) -> new Department(rs.getLong("department_id"), rs.getString("department_name")))
+        .forEach(department -> System.out.println(department.toString()));
+
+        jdbcTemplate.execute("TRUNCATE TABLE departments;");
+        jdbcTemplate.execute("DROP TABLE departments");
 
         // create a list of first and last names
         List<Object[]> splitUpNames = Stream.of("Java Ninja", "Spring Guru", "Java Guru", "Spring Ninja")
