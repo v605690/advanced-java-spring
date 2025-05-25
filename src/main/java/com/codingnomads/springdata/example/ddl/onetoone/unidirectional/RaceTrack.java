@@ -20,6 +20,6 @@ public class RaceTrack {
     private String type;
     private String length;
 
-    @OneToOne
+    @OneToOne( mappedBy = "raceTrack")
     private Driver driver;
 }
