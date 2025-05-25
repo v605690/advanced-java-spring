@@ -20,4 +20,7 @@ public class Driver {
 
     @OneToOne
     private Car car;
+
+    @OneToOne
+    private RaceTrack raceTrack;
 }
