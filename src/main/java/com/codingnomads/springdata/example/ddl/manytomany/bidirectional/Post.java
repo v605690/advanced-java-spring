@@ -1,6 +1,7 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springdata.example.ddl.manytomany.bidirectional;
 
+import com.codingnomads.springdata.example.ddl.manytoone.bidirectional.Teacher;
 import jakarta.persistence.*;
 import java.util.Set;
 import lombok.*;
@@ -27,4 +28,10 @@ public class Post {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Location> locations;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Message> messages;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Sender> senders;
 }
