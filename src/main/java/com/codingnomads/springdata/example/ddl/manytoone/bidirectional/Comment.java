@@ -22,4 +22,9 @@ public class Comment {
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private Post post;
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    private Teacher teacher;
+
+
 }
