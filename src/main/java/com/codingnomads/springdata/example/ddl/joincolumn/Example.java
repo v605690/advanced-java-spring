@@ -28,4 +28,8 @@ public class Example {
         @JoinColumn(name = "references_name", referencedColumnName = "name")
     })
     private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "name", referencedColumnName = "admin_name")
+    private Administrator administrator;
 }
