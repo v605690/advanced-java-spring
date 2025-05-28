@@ -23,25 +23,31 @@ public class JpaRepoDemo implements CommandLineRunner {
         SoftDrink fanta = SoftDrink.builder().name("Fanta").rating(10).build();
         SoftDrink coke = SoftDrink.builder().name("Coca-Cola").rating(4).build();
         SoftDrink drPepper = SoftDrink.builder().name("Dr. Pepper").rating(1).build();
+        SoftDrink pepsi = SoftDrink.builder().name("Pepsi").rating(2).build();
+        SoftDrink melloYello = SoftDrink.builder().name("Mello Yello").rating(6).build();
+        SoftDrink mountainDew = SoftDrink.builder().name("Mountain Dew").rating(1).build();
+        SoftDrink mrPibb = SoftDrink.builder().name("MR Pibb").rating(3).build();
+        SoftDrink water = SoftDrink.builder().name("Water").rating(0).build();
+        
 
         // save single entity instance
         fanta = softDrinkRepo.save(fanta);
 
         // save multiple entity instances at a time
-        List<SoftDrink> insertedSoftDrinks = softDrinkRepo.saveAll(List.of(coke, drPepper));
+        List<SoftDrink> insertedSoftDrinks = softDrinkRepo.saveAll(List.of(coke, drPepper , pepsi, melloYello, mountainDew, mrPibb, water, fanta));
 
         // make sure all entities are actually saved to the database
         softDrinkRepo.flush();
 
         // update coke and drPepper to have rating 0 in the database
         for (SoftDrink sd : insertedSoftDrinks) {
-            sd.setRating(0);
+            sd.setRating(4);
             softDrinkRepo.save(sd);
         }
 
         System.out.println("ALL SOFT DRINKS IN DESCENDING ORDER BASED ON ID");
         // get all soft drinks in ascending order and print toString() to the console
-        softDrinkRepo.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(System.out::println);
+        softDrinkRepo.findAll(Sort.by(Sort.Direction.ASC, "id")).forEach(System.out::println);
 
         // find all using an example
         System.out.println("FINDING ALL USING EXAMPLE");
@@ -67,6 +73,6 @@ public class JpaRepoDemo implements CommandLineRunner {
         page.getContent().forEach(System.out::println);
 
         // delete all 3 soft drinks in a batch
-        softDrinkRepo.deleteAllInBatch();
+        //softDrinkRepo.deleteAllInBatch();
     }
 }
