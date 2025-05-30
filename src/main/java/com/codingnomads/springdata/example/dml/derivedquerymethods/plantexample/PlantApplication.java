@@ -19,6 +19,7 @@ public class PlantApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
         SoilType compost = SoilType.builder().name("compost").dry(false).ph(10).build();
         SoilType swamp = SoilType.builder().name("swamp").dry(false).ph(20).build();
         SoilType arid = SoilType.builder().name("arid").dry(true).ph(1).build();

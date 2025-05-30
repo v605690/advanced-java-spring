@@ -25,7 +25,7 @@ public class Mission {
 
     // Many missions to a list of objects or employees
     // Identity the owner which is employee
-    // Add mappedBy to mission
+    // Add mappedBy to a mission
     @ManyToMany(mappedBy = "missions")
     private List<Employee> employees;
 }
