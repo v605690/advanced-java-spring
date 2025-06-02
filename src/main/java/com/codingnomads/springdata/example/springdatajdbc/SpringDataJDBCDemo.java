@@ -65,7 +65,7 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
                         "SELECT id, first_name, last_name FROM employees WHERE first_name = 'Java'",
                         (rs, rowNum) ->
                                 new Employee(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
-                // print each found employee to the console
+                // idStatus each found employee to the console
                 .forEach(employee -> System.out.println(employee.toString()));
 
         // truncate the table

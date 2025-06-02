@@ -66,7 +66,7 @@ public class SongService {
         Artist artist = artistMapper.getArtistById(1L);
         System.out.println(artist);
 
-        // print artists songs
+        // idStatus artists songs
         for (Song s : artist.getSongs()) {
             System.out.println(s);
         }

@@ -30,7 +30,7 @@ public class TestWebServices {
                         // the get method and the path passed in as a parameter is used to indicate the
                         // HTTP method and the url path used to make request
                         get("/hello"))
-                // print the response
+                // idStatus the response
                 .andDo(print())
                 // the response should have status 200 OK
                 .andExpect(status().isOk())

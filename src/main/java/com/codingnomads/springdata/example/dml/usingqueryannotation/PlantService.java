@@ -93,10 +93,10 @@ public class PlantService {
             // get the page from the database
             page = plantRepo.getPlantsWithPhLessThan(8, pageRequest);
 
-            // print the page number + 1 to offset the start being 0
+            // idStatus the page number + 1 to offset the start being 0
             System.out.println("PAGE " + (page.getNumber() + 1));
 
-            // print the contents of the current page
+            // idStatus the contents of the current page
             page.getContent().forEach(System.out::println);
 
             // get the next page request

@@ -46,7 +46,7 @@ public class JpaRepoDemo implements CommandLineRunner {
         }
 
         System.out.println("ALL SOFT DRINKS IN DESCENDING ORDER BASED ON ID");
-        // get all soft drinks in ascending order and print toString() to the console
+        // get all soft drinks in ascending order and idStatus toString() to the console
         softDrinkRepo.findAll(Sort.by(Sort.Direction.ASC, "id")).forEach(System.out::println);
 
         // find all using an example

@@ -51,7 +51,7 @@ public class RecipeControllerEndpointTest {
         // set up GET request
         mockMvc.perform(get("/recipes/" + recipeId))
 
-                // print response
+                // idStatus response
                 .andDo(print())
                 // expect status 200 OK
                 .andExpect(status().isOk())
@@ -72,7 +72,7 @@ public class RecipeControllerEndpointTest {
         final long recipeId = 5000;
         // set up guaranteed to fail in testing environment request
         mockMvc.perform(get("/recipes/" + recipeId))
-                // print response
+                // idStatus response
                 .andDo(print())
                 // expect status 404 NOT FOUND
                 .andExpect(status().isNotFound())

@@ -35,7 +35,7 @@ public class TaskController {
                 .body(savedTask);
     }
 
-    @PostMapping(value = "/print")
+    @PostMapping(value = "/idStatus")
     public ResponseEntity<?> printMessage(@RequestBody(required = false) String message) {
 
         if (message == null) {

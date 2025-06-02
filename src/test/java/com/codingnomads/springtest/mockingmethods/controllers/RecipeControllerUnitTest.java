@@ -76,7 +76,7 @@ public class RecipeControllerUnitTest {
         when(recipeService.getRecipeById(any())).thenThrow(new NoSuchRecipeException("test this is in body"));
 
         mockMvc.perform(get("/recipes/" + 1L))
-                // print response
+                // idStatus response
                 .andDo(print())
                 // expect status 404 NOT FOUND
                 .andExpect(status().isNotFound())
