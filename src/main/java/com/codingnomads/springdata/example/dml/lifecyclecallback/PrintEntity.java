@@ -27,8 +27,6 @@ public class PrintEntity {
     @PrePersist
     @PreUpdate
     private void checkForIllegalState() {
-        if (id == 1L) {
-            throw new IllegalStateException("If id is set to 1 do not proceed");
-        }
+        System.out.println("PrePersist and PreUpdate");
     }
 }

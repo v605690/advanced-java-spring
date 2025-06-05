@@ -1,13 +1,11 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springdata.example.dml.lifecyclecallback;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Iterator;
 import java.util.List;
 
 @SpringBootApplication
@@ -21,6 +19,10 @@ public class LifecycleCallbackDemo {
     public CommandLineRunner runStuff(PrintEntityRepository printEntityRepository) {
         return (args) -> {
             // put your logic here
+            PrintEntity printEn = new PrintEntity();
+            printEn.setId(2L);
+            printEntityRepository.save(printEn);
+
             printEntityRepository.findAll();
 
             printEntityRepository.findById(Long.valueOf(1L));
