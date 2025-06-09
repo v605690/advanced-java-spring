@@ -27,6 +27,12 @@ public interface SongMapper {
     @Select("SELECT * " + "FROM mybatis.songs " + "WHERE artist_name = #{param1};")
     List<Song> getSongsByArtist(String artistName);
 
+    @Select("SELECT * " + "FROM mybatis.songs " + "WHERE album_name = #{param1};")
+    List<Song> getSongsByAlbumName(String albumName);
+
+    @Select("SELECT * " + "FROM mybatis.songs " + "WHERE artist_name = #{param1} AND name = #{param2};")
+    List<Song> getSongsByArtistNameAndName(String artistName, String name);
+
     @Update("UPDATE mybatis.songs "
             + "SET name = #{name}, artist_name = #{artist_name}, album_name = #{album_name}, song_length = #{song_length} "
             + "WHERE id = #{id};")
@@ -36,5 +42,5 @@ public interface SongMapper {
     void deleteSongById(Long songId);
 
     @Delete("DELETE FROM mybatis.songs " + "WHERE artist_name = #{artistName} AND album_name = #{albumName};")
-    void deleteSongsByAlbumAndArtist(String artistName, String albumName);
+    Song deleteSongsByAlbumAndArtist(String artistName, String albumName);
 }
