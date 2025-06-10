@@ -14,7 +14,7 @@ public class ResultsDemoApplication {
     }
 
     @Bean
-    public CommandLineRunner loadInitialData(SongMapper songMapper) {
+    public CommandLineRunner loadInitialData(SongMapper songMapper, PlaylistMapper playlistMapper) {
         return (args) -> {
             // notice the setter names have changed to match Java naming conventions
             Song song1 = new Song();
@@ -34,6 +34,23 @@ public class ResultsDemoApplication {
 
             Song song3 = songMapper.getSongById(1L);
             System.out.println(song3.toString());
+
+            Playlist playlist = new Playlist();
+            playlist.setPunkPlayList("Blink 182");
+            playlist.setRockPlayList("Van Halen");
+            playlist.setFavPlayList("Judah and The Lion");
+
+            Playlist playlist2 = new Playlist();
+            playlist2.setPunkPlayList("Green Day");
+            playlist2.setRockPlayList("Metallica");
+            playlist2.setFavPlayList("The Killers");
+
+            playlistMapper.insert(playlist);
+            playlistMapper.insert(playlist2);
+
+            playlistMapper.delete(1L);
+            playlistMapper.delete(12L);
+
         };
     }
 }
