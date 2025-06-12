@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface SongMapper {
 
-    @Insert("INSERT INTO mybatis.songs " + "(name, artist_id, album_id, song_length) "
-            + "VALUES (#{name}, #{artist.id}, #{album.id}, #{songLength});")
+    @Insert("INSERT INTO mybatis.songs " + "(name, artist_id, song_length) "
+            + "VALUES (#{name}, #{artist.id}, #{songLength});")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insertNewSong(Song song);
 
@@ -29,8 +29,7 @@ public interface SongMapper {
                     @Result(property = "songLength", column = "song_length"),
                     @Result(
                             // property to map to
-                            property = "artist",
-                            column = "artist_id",
+                            property = "artist", column = "artist_id",
                             javaType = Artist.class,
                             one = @One
                                     (select = "com.codingnomads.springdata.example.mybatis.oneandmany.mappers.ArtistMapper.getArtistByIdWithoutAlbums",
@@ -58,14 +57,14 @@ public interface SongMapper {
     @ResultMap("songResultMap")
     List<Song> getSongsByAlbumId(Long albumId);
 
-//    @Update("UPDATE mybatis.songs "
-//            + "SET name = #{name}, artist_id = #{artist.id}, album = #{album}, song_length = #{songLength} "
-//            + "WHERE id = #{id};")
-//    void updateSong(Song song);
+    @Update("UPDATE mybatis.songs "
+            + "SET name = #{name}, artist_id = #{artist.id}, album = #{album_id}, song_length = #{songLength} "
+            + "WHERE id = #{id};")
+    void updateSong(Song song);
 
     @Delete("DELETE FROM mybatis.songs WHERE id = #{param1};")
     void deleteSongById(Long songId);
 
-//    @Delete("DELETE FROM mybatis.songs " + "WHERE artist_id = #{artistId} AND album = #{album};")
-//    void deleteSongsByAlbumAndArtist(Long artistId, String album);
+    @Delete("DELETE FROM mybatis.songs " + "WHERE artist_id = #{artistId} AND album = #{album};")
+    void deleteSongsByAlbumAndArtist(Long artistId, String album);
 }

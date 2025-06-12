@@ -44,33 +44,33 @@ public class OneAndManyApplication {
             albumMapper.insertNewAlbum(album1);
 
 
-//            Song song1 = new Song();
-//            song1.setName("Minnesota, WI");
-//            song1.setArtist(artist1);
-//            song1.setSongLength(232);
-//            artist1.setAlbums(Collections.singletonList(new Album()));
-//
-//            Artist artist2 = new Artist();
-//            artist2.setName("Gus Dapperton");
-//            artist2.setBio("Brendan Patrick Rice, better known by his stage name Gus Dapperton, "
-//                    + "is an American singer and songwriter from Warwick, New York.");
-//            artistMapper.insertNewArtist(artist2);
-//
-//            Song song2 = new Song();
-//            song2.setName("Post Humorous");
-//            song2.setArtist(artist2);
-//            song2.setSongLength(279);
-//            artist2.setAlbums(Collections.singletonList(new Album()));
-//
-//            songMapper.insertNewSong(song1);
-//            songMapper.insertNewSong(song2);
-//
-//            Song song3 = songMapper.getSongById(1L);
-//            System.out.println(song3.toString());
-//
-//            Artist artist3 = artistMapper.getArtistByIdWithSongs(1L);
-//            System.out.println(artist3.toString());
-//            System.out.println(artist3.getAlbums());
+            Song song1 = new Song();
+            song1.setName("Minnesota, WI");
+            song1.setArtist(artist1);
+            song1.setSongLength(232);
+            artist1.setAlbums(Collections.singletonList(new Album()));
+
+            Artist artist2 = new Artist();
+            artist2.setName("Gus Dapperton");
+            artist2.setBio("Brendan Patrick Rice, better known by his stage name Gus Dapperton, "
+                    + "is an American singer and songwriter from Warwick, New York.");
+            artistMapper.insertNewArtist(artist2);
+
+            Song song2 = new Song();
+            song2.setName("Post Humorous");
+            song2.setArtist(artist2);
+            song2.setSongLength(279);
+            artist2.setAlbums(Collections.singletonList(new Album()));
+
+            songMapper.insertNewSong(song1);
+            songMapper.insertNewSong(song2);
+
+            Song song3 = songMapper.getSongById(1L);
+            System.out.println(song3.toString());
+
+            Artist artist3 = artistMapper.getArtistByIdWithSongs(14L);
+            System.out.println(artist3.toString());
+            System.out.println(artist3.getAlbums());
         };
     }
 }
