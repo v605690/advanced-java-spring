@@ -5,6 +5,8 @@ import com.codingnomads.springdata.example.mybatis.extraexample.mappers.ChapterM
 import com.codingnomads.springdata.example.mybatis.extraexample.mappers.ImageMapper;
 import com.codingnomads.springdata.example.mybatis.extraexample.mappers.LessonMapper;
 import com.codingnomads.springdata.example.mybatis.extraexample.mappers.SectionMapper;
+import com.codingnomads.springdata.example.mybatis.extraexample.models.Chapter;
+import com.codingnomads.springdata.example.mybatis.extraexample.models.Section;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,5 +43,40 @@ public class MyBatisExampleApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {}
+    public void run(String... args) throws Exception {
+//        imageMapper.insertNewImage("Car", toString().getBytes());
+//        imageMapper.insertNewImage("Bike", toString().getBytes());
+//        imageMapper.insertNewImage("Truck", toString().getBytes());
+//        imageMapper.insertNewImage("Van", toString().getBytes());
+
+        lessonMapper.insertNewLesson("History", "American Civil War", 1001L);
+//        lessonMapper.insertNewLesson("Science", "The Brain", 1501L);
+
+
+//
+//        chapterMapper.insertNewChapter("American Civil War", 1501L);
+//        chapterMapper.insertNewChapter("Science", 1001L);
+//
+//        sectionMapper.insertNewSection("American Civil War - Origins");
+//        sectionMapper.insertNewSection("Science - Biology");
+//
+//        imageMapper.getImageByName();
+//        lessonMapper.getLessonById(1001L);
+//        chapterMapper.getByChapterId(1501L);
+        //sectionMapper.getSectionById(1L);
+    }
+
+//    public void getData(){
+//        System.out.println(imageMapper.getImageByName());
+//        System.out.println(lessonMapper.getLessonById(5L));
+//        System.out.println(chapterMapper.getByChapterId(10L));
+//        System.out.println(sectionMapper.getSectionById(1L));
+//
+//        Section section = sectionMapper.getSectionById(1L);
+//        System.out.println(section);
+//
+//        for (Chapter s : section.getChapters()) {
+//            System.out.println(s);
+//        }
+//    }
 }

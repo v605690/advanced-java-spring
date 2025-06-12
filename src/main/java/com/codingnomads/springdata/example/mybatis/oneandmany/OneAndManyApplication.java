@@ -1,8 +1,10 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springdata.example.mybatis.oneandmany;
 
+import com.codingnomads.springdata.example.mybatis.oneandmany.mappers.AlbumMapper;
 import com.codingnomads.springdata.example.mybatis.oneandmany.mappers.ArtistMapper;
 import com.codingnomads.springdata.example.mybatis.oneandmany.mappers.SongMapper;
+import com.codingnomads.springdata.example.mybatis.oneandmany.models.Album;
 import com.codingnomads.springdata.example.mybatis.oneandmany.models.Artist;
 import com.codingnomads.springdata.example.mybatis.oneandmany.models.Song;
 import java.util.Collections;
@@ -30,43 +32,45 @@ public class OneAndManyApplication {
     }
 
     @Bean
-    public CommandLineRunner loadInitialData(SongMapper songMapper, ArtistMapper artistMapper) {
+    public CommandLineRunner loadInitialData(SongMapper songMapper, ArtistMapper artistMapper, AlbumMapper albumMapper) {
         return (args) -> {
             Artist artist1 = new Artist();
+            //   artist1.setAlbums(Collections.singletonList(new Album()));
             artist1.setName("Bon Iver");
             artist1.setBio(
                     "Bon Iver is an American indie folk band founded " + "in 2006 by singer-songwriter Justin Vernon.");
             artistMapper.insertNewArtist(artist1);
+            Album album1 = Album.builder().artist(artist1).name("Bon Iver").year(2006).build();
+            albumMapper.insertNewAlbum(album1);
 
-            Song song1 = new Song();
-            song1.setName("Minnesota, WI");
-            song1.setAlbumName("Bon Iver");
-            song1.setArtist(artist1);
-            song1.setSongLength(232);
-            artist1.setSongs(Collections.singletonList(song1));
 
-            Artist artist2 = new Artist();
-            artist2.setName("Gus Dapperton");
-            artist2.setBio("Brendan Patrick Rice, better known by his stage name Gus Dapperton, "
-                    + "is an American singer and songwriter from Warwick, New York.");
-            artistMapper.insertNewArtist(artist2);
-
-            Song song2 = new Song();
-            song2.setName("Post Humorous");
-            song2.setAlbumName("Orca");
-            song2.setArtist(artist2);
-            song2.setSongLength(279);
-            artist2.setSongs(Collections.singletonList(song2));
-
-            songMapper.insertNewSong(song1);
-            songMapper.insertNewSong(song2);
-
-            Song song3 = songMapper.getSongById(1L);
-            System.out.println(song3.toString());
-
-            Artist artist3 = artistMapper.getArtistByIdWithSongs(1L);
-            System.out.println(artist3.toString());
-            System.out.println(artist3.getSongs());
+//            Song song1 = new Song();
+//            song1.setName("Minnesota, WI");
+//            song1.setArtist(artist1);
+//            song1.setSongLength(232);
+//            artist1.setAlbums(Collections.singletonList(new Album()));
+//
+//            Artist artist2 = new Artist();
+//            artist2.setName("Gus Dapperton");
+//            artist2.setBio("Brendan Patrick Rice, better known by his stage name Gus Dapperton, "
+//                    + "is an American singer and songwriter from Warwick, New York.");
+//            artistMapper.insertNewArtist(artist2);
+//
+//            Song song2 = new Song();
+//            song2.setName("Post Humorous");
+//            song2.setArtist(artist2);
+//            song2.setSongLength(279);
+//            artist2.setAlbums(Collections.singletonList(new Album()));
+//
+//            songMapper.insertNewSong(song1);
+//            songMapper.insertNewSong(song2);
+//
+//            Song song3 = songMapper.getSongById(1L);
+//            System.out.println(song3.toString());
+//
+//            Artist artist3 = artistMapper.getArtistByIdWithSongs(1L);
+//            System.out.println(artist3.toString());
+//            System.out.println(artist3.getAlbums());
         };
     }
 }

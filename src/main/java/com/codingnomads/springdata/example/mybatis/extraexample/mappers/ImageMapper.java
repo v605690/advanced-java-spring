@@ -12,7 +12,7 @@ public interface ImageMapper {
     int insertNewImage(String name, byte[] data);
 
     @Select("SELECT * FROM mybatis.images WHERE name = #{param1};")
-    Image getImageByName(String name);
+    Image getImageByName();
 
     @Select("SELECT i.name, i.image_data " + "FROM mybatis.images i "
             + "JOIN mybatis.lesson_image li "
@@ -28,4 +28,5 @@ public interface ImageMapper {
 
     @Delete("DELETE FROM mybatis.images WHERE name = #{param1};")
     void deleteImageByName(String name);
+
 }
