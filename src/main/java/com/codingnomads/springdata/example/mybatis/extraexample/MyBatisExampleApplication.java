@@ -69,6 +69,8 @@ public class MyBatisExampleApplication implements CommandLineRunner {
         imageMapper.insertNewImage("Biology", toString().getBytes());
         System.out.println(imageMapper.getImagesByLessonId(chapter.getId()));
         lessonMapper.getLessonById(1L);
+
+        getData();
     }
 
     public void getData(){
