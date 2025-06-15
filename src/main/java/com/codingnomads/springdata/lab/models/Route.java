@@ -3,6 +3,10 @@ package com.codingnomads.springdata.lab.models;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import lombok.*;
 
 @Entity
@@ -11,7 +15,6 @@ import lombok.*;
 @Getter
 @Setter
 @Table(name = "routes")
-@Builder
 @ToString
 public class Route implements Serializable {
 
@@ -34,4 +37,26 @@ public class Route implements Serializable {
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_routes_destination_area_id"))
     private Area destination;
+
+    @ManyToMany(mappedBy = "routes")
+    private List<Waypoint> waypoints;
+
+    public String generateCode() {
+        return origin.getCode() + "-" + destination.getCode();
+    }
+
+@Builder
+    public Route(Area origin, Area destination) {
+        this.origin = origin;
+        this.destination = destination;
+        this.code = generateCode();
+    }
+
+    public void addWaypoint(Waypoint waypoint) {
+        if (this.waypoints == null) {
+            this.waypoints = new ArrayList<>(Collections.singletonList(waypoint));
+        } else  {
+            this.waypoints.add(waypoint);
+        }
+    }
 }
