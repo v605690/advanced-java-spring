@@ -13,6 +13,7 @@ public interface SectionMapper {
 
     void insertNewSection(String name);
 
+
     @Select("SELECT id, name FROM mybatis.sections WHERE id = #{param1};")
     @Results(
             @Result(

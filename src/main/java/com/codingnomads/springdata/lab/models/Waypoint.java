@@ -22,8 +22,8 @@ public class Waypoint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Double latitude;
-    private Double longitude;
+    private Double lat;
+    private Double lon;
 
     @ManyToMany
     @JoinTable(
@@ -31,12 +31,13 @@ public class Waypoint implements Serializable {
             joinColumns = @JoinColumn(name = "coords_id"))
     private List<Route> routes;
 
-    public Waypoint(String name, Double longitude, Double latitude, Route route) {
+    public Waypoint(String name, Double lat, Double lon, List<Route> routes) {
         this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.routes = List.of(route);
+        this.lat = lat;
+        this.lon = lon;
+        this.routes = routes;
     }
+
     public void addRoutes(List<Route> routes) {
         if (routes != null) {
             routes.forEach(r -> r.addWaypoint(this));

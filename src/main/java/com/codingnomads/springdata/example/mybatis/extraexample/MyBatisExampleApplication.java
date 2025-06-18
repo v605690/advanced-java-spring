@@ -54,7 +54,8 @@ public class MyBatisExampleApplication implements CommandLineRunner {
 //        imageMapper.insertNewImage("History", toString().getBytes());
 //        lessonMapper.addImageToLesson(32L, "History");
 
-        sectionMapper.insertNewSection("Science");
+        sectionMapper.insertNewSection("Computer Science");
+
         System.out.println(sectionMapper.getSectionById(10L));
         Chapter chapter = Chapter.builder().name("Science").id(2L).build();
         System.out.println(chapterMapper.getByChapterId(chapter.getId()));
