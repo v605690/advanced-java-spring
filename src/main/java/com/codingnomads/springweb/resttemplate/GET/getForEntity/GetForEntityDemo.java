@@ -39,7 +39,7 @@ public class GetForEntityDemo {
                     restTemplate.getForEntity(URL, RandomQuote.class, map);
 
             if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
-                RandomQuote quote = responseEntity.getBody();
+                //RandomQuote quote = responseEntity.getBody();
                 //System.out.println(Arrays.toString(quote));
                 String response = restTemplate.getForEntity(URL, String.class, map).toString();
                 System.out.println(response);
