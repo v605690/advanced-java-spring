@@ -41,7 +41,7 @@ public class GetForEntityDemo {
             if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
                 //RandomQuote quote = responseEntity.getBody();
                 //System.out.println(Arrays.toString(quote));
-                String response = restTemplate.getForEntity(URL, String.class, map).toString();
+                String response = restTemplate.getForEntity(URL, String.class, map).getBody();
                 System.out.println(response);
             } else {
                 System.out.println("Something went wrong! The response was not marked with status code 200");
