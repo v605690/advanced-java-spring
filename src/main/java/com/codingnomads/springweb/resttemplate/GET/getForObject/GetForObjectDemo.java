@@ -1,6 +1,7 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springweb.resttemplate.GET.getForObject;
 
+import com.codingnomads.springweb.resttemplate.GET.getForObject.video_demo.CodingNomadsTasksApiResponse;
 import com.codingnomads.springweb.resttemplate.GET.models.QuoteTemplate;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,11 @@ public class GetForObjectDemo {
 
             // submit more requests here
 
-            //        CodingNomadsTasksApiResponse response =
-            //                restTemplate.getForObject("http://demo.codingnomads.co:8080/tasks_api/users/5",
-            //                        CodingNomadsTasksApiResponse.class);
-            //
-            //        System.out.println(response.toString());
+                    CodingNomadsTasksApiResponse response =
+                            restTemplate.getForObject("http://demo.codingnomads.co:8080/tasks_api/users/5",
+                                    CodingNomadsTasksApiResponse.class);
+
+                    System.out.println(response.toString());
 
         };
     }
