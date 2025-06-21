@@ -1,10 +1,6 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springweb.resttemplate.GET.getForEntity;
 
-import com.codingnomads.springweb.resttemplate.GET.models.QuoteTemplate;
-
-import java.net.URI;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class GetForEntityDemo {
 
-    private static final String URL = "https://today.zenquotes.io?month={month}&day={day}";
+    private static final String URL = "https://today.zenquotes.io?api&month={month}&day={day}";
 
     @Autowired
     RestTemplate restTemplate;
@@ -39,13 +35,14 @@ public class GetForEntityDemo {
     map.put("day", "21");
 
         return args -> {
-            ResponseEntity<QuoteTemplate[]> responseEntity =
-                    restTemplate.getForEntity(URL, QuoteTemplate[].class, map);
+            ResponseEntity<RandomQuote> responseEntity =
+                    restTemplate.getForEntity(URL, RandomQuote.class, map);
 
             if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
-                QuoteTemplate[] quoteTemplate = responseEntity.getBody();
-                System.out.println(Arrays.toString(quoteTemplate));
-                //System.out.println(map);
+                RandomQuote quote = responseEntity.getBody();
+                //System.out.println(Arrays.toString(quote));
+                String response = restTemplate.getForEntity(URL, String.class, map).toString();
+                System.out.println(response);
             } else {
                 System.out.println("Something went wrong! The response was not marked with status code 200");
             }
