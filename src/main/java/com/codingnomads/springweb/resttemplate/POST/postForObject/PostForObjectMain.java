@@ -3,6 +3,9 @@ package com.codingnomads.springweb.resttemplate.POST.postForObject;
 
 import com.codingnomads.springweb.resttemplate.POST.models.ResponseObject;
 import com.codingnomads.springweb.resttemplate.POST.models.Task;
+import com.codingnomads.springweb.resttemplate.POST.models.User;
+import com.codingnomads.springweb.resttemplate.POST.models.UserResponseObject;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +30,7 @@ public class PostForObjectMain {
                     .name("learn how to use postForObject() - video demo")
                     .description("get comfortable using the RestTemplate postForObject() method")
                     // use a valid user id
-                    .userId(380)
+                    .userId(13100)
                     .completed(false)
                     .build();
 
@@ -37,6 +40,20 @@ public class PostForObjectMain {
             if (taskReturnedByServerAfterPost != null) {
                 System.out.println(taskReturnedByServerAfterPost.toString());
             }
+
+            User user = User.builder()
+                    .email("johnsmith@gmail.com")
+                    .firstName("John")
+                    .lastName("Smith")
+                    .build();
+
+            UserResponseObject userReturnedByServerAfterPost = restTemplate.postForObject(
+                    "http://demo.codingnomads.co:8080/tasks_api/users", user, UserResponseObject.class);
+
+            if (userReturnedByServerAfterPost != null) {
+                System.out.println(userReturnedByServerAfterPost.toString());
+            }
+
         };
     }
 }
