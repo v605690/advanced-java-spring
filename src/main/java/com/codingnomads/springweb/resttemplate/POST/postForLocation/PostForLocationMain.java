@@ -30,11 +30,10 @@ public class PostForLocationMain {
                     .name("learn how to use postForLocation()")
                     .description("get comfortable using the RestTemplate postForLocation() method")
                     // be sure to use a valid user id
-                    .userId(380)
+                    .userId(13100)
                     .completed(false)
                     .build();
 
-            // use postForLocation() to get the URL for the new resource
             URI returnedLocation = restTemplate.postForLocation(
                     "http://demo.codingnomads.co:8080/tasks_api/tasks", newTask, ResponseObject.class);
 
@@ -44,6 +43,40 @@ public class PostForLocationMain {
                     "http://demo.codingnomads.co:8080/tasks_api/tasks", newTask, ResponseObject.class);
 
             System.out.println(responseEntity.getHeaders().get("Location"));
+
+           Task task2 = Task.builder()
+                    .name("New Task")
+                    .description("new task")
+                    .userId(13099)
+                    .completed(false)
+                   .build();
+
+           URI returnedLocation2 = restTemplate.postForLocation(
+                   "http://demo.codingnomads.co:8080/tasks_api/tasks", task2, ResponseObject.class);
+           System.out.println(Objects.requireNonNull(returnedLocation2));
+
+           ResponseEntity<?> responseEntity2 = restTemplate.postForEntity(
+                   "http://demo.codingnomads.co:8080/tasks_api/tasks", task2, ResponseObject.class);
+
+            System.out.println(responseEntity2.getHeaders().get("Location"));
+
+
+           Task task3 = Task.builder()
+                    .name("New Task2")
+                    .description("new task2")
+                    .userId(13098)
+                    .completed(true)
+                   .build();
+
+            URI returnedLocation3 = restTemplate.postForLocation(
+                    "http://demo.codingnomads.co:8080/tasks_api/tasks", task3, ResponseObject.class);
+            System.out.println(Objects.requireNonNull(returnedLocation3));
+
+            ResponseEntity<?> responseEntity3 = restTemplate.postForEntity(
+                    "http://demo.codingnomads.co:8080/tasks_api/tasks", task3, ResponseObject.class);
+            System.out.println(responseEntity3.getHeaders().get("Location"));
+
+            // use postForLocation() to get the URL for the new resource
         };
     }
 }
