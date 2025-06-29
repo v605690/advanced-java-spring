@@ -26,4 +26,12 @@ public class ConversionController {
     public String returnTheString() {
         return text;
     }
+
+    @RequestMapping(path = "/backwards", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public String returnTheStringBackwards() {
+        StringBuilder binary = new StringBuilder("CodingNomads make it fun and challenging to learn Java");
+        String reversedBinary;
+        reversedBinary = binary.reverse().toString();
+        return reversedBinary;
+    }
 }
