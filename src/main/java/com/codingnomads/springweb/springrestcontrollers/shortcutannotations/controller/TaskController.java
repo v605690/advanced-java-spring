@@ -34,7 +34,11 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable long id, @RequestBody Task task) throws URISyntaxException {
+    public ResponseEntity<Task> updateTask(
+            @PathVariable long id,
+            @RequestBody Task task)
+            // @RequestParam(required = false, defaultValue = "false") String completed)
+            throws URISyntaxException {
         Task updateTask = taskRepository.findById(id).orElseThrow();
 
         updateTask.setName(task.getName());

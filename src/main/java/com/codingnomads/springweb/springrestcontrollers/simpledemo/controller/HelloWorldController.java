@@ -48,8 +48,8 @@ public class HelloWorldController {
     }
 
 
-    @RequestMapping(path = "/team-roaster", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String getNFLTeams() {
+    @RequestMapping(path = "/team-roaster", method = RequestMethod.GET)
+    public List<NFLTeam> getNFLTeams() {
         List<NFLTeam> teams = new ArrayList<>();
         teams.add(new NFLTeam(1, "Texans"));
         teams.add(new NFLTeam(2, "Baltimore Ravens"));
@@ -62,8 +62,10 @@ public class HelloWorldController {
         teams.add(new NFLTeam(9, "Kansas City Chiefs"));
         teams.add(new NFLTeam(10, "Las Vegas Raiders"));
 
-        return teams.stream()
-                .map(NFLTeam::toString)
-                .collect(Collectors.joining("\n"));
+        return teams;
+
+//        return teams.stream()
+//                .map(NFLTeam::toString)
+//                .collect(Collectors.joining("\n"));
     }
 }
