@@ -33,6 +33,17 @@ public class TaskController {
                 .body(savedTask);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable long id, @RequestBody Task task) throws URISyntaxException {
+        Task updateTask = taskRepository.findById(id).orElseThrow();
+
+        updateTask.setName(task.getName());
+        updateTask.setCompleted(task.getCompleted());
+
+        final Task saveTask = taskRepository.save(updateTask);
+        return ResponseEntity.ok(saveTask);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Task> getTask(@PathVariable Long id) {
 
