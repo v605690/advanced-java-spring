@@ -3,6 +3,8 @@ package com.codingnomads.springweb.returningdatatoclient.usingresponseentity.con
 
 import com.codingnomads.springweb.returningdatatoclient.usingresponseentity.model.User;
 import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +40,23 @@ public class ResponseController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/practice")
+    public ResponseEntity<User> constMethod() throws URISyntaxException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("New Test", "Dev Header Test");
+        headers.add("Location", "/practice" + user.getId());
+        //return new ResponseEntity<>(user, headers, HttpStatus.CREATED);
+
+        return ResponseEntity
+                .status(201)
+                .header("Location", "/practice" + user.getId())
+                .body(user);
+
+//        return ResponseEntity
+//                .created(new URI("/practice" + user.getId()))
+//                .body(user);
+    }
+
+
 }
