@@ -24,6 +24,16 @@ public class TaskController {
         return "ID: " + taskId;
     }
 
+    @GetMapping(value = "/custom-name-path", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTaskWithCustomNamePath(@RequestParam(name = "name") String name) {
+        return "NAME: " + name;
+    }
+
+    @GetMapping(value = "/custom-variable-path", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTaskWithCustomVariablePath1(@RequestParam(name = "id") Long taskId) {
+        return "ID: " + taskId;
+    }
+
     @GetMapping(value = "/request-param-optional", produces = MediaType.APPLICATION_JSON_VALUE)
     public Task getTaskWithOptionalRequestPram(@RequestParam(name = "id", required = false) Long taskId) {
         if (taskId != null) {
@@ -36,6 +46,13 @@ public class TaskController {
             @RequestParam(name = "name", required = false, defaultValue = "Task One") String taskName) {
         return Task.builder().name(taskName).build();
     }
+
+    @GetMapping(value = "/custom-param-path", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task getTaskWithCustomParamPath(
+            @RequestParam(name = "name", required = false, defaultValue = "Custom Path One") String taskName) {
+        return Task.builder().name(taskName).build();
+    }
+
 
     @GetMapping(value = "/request-parameter-with-multiple-values", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Task> getTasksWithNamesRequestParam(@RequestParam(name = "names") List<String> names) {
