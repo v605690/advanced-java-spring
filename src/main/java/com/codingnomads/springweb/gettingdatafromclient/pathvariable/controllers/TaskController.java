@@ -22,6 +22,13 @@ public class TaskController {
         return Task.builder().id(id).name(name).completed(completed).build();
     }
 
+    @GetMapping(value = "/{name}")
+    public String getTask (
+            @PathVariable(name = "name") String name) {
+
+                return name;
+    }
+
     @GetMapping(value = {"/path-variable-optional", "/path-variable-optional/{name}"})
     public String pathVariableOptional(@PathVariable(required = false) String name) {
         if (!StringUtils.isEmpty(name)) {
@@ -49,4 +56,15 @@ public class TaskController {
     public String pathVariableIsNotEncoded(@PathVariable String name) {
         return name;
     }
+
+    @GetMapping(value = "/products/{name}")
+    public String getProduct(@PathVariable String name) {
+        return name;
+    }
+
+    @GetMapping("/employees/{id}/{name}")
+    public String getEmployeeByIdAndName(@PathVariable String id, @PathVariable String name) {
+        return "ID: " + id + ", name: " + name;
+    }
+
 }
