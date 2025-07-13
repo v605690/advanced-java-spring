@@ -49,4 +49,14 @@ public class TaskController {
             return ResponseEntity.ok().body(message);
         }
     }
+    @PostMapping("/lun")
+    public ResponseEntity<String> createNewTask(@RequestBody Task task) {
+        return ResponseEntity.ok("Lun task - " + task.getName());
+    }
+
+    @PostMapping("/luntask")
+    public ResponseEntity<String> createLunTask(@RequestBody Task[] task) {
+        return ResponseEntity.ok("lun task created two disk  - ");
+    }
+
 }
