@@ -6,8 +6,10 @@ import com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.mo
 import com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.repositories.DatabaseFileRepository;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("/images")
 public class HandleMultipartDataController {
@@ -26,8 +30,8 @@ public class HandleMultipartDataController {
     @Autowired
     DatabaseFileRepository fileRepository;
 
-    // @PostMapping("/uploadSingleFile")
-    @PostMapping()
+   // @PostMapping("/uploadSingleFile")
+   @PostMapping()
     public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
 
         String fileName;
@@ -148,5 +152,22 @@ public class HandleMultipartDataController {
         fileRepository.deleteById(fileId);
         return ResponseEntity.ok(
                 "File with ID " + fileId + " and name " + optional.get().getFileName() + " was deleted");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> searchFilesByName(@PathVariable("id") String searchTerm) {
+        List<DatabaseFile> matchFiles = fileRepository.findByFileName(searchTerm);
+
+        if (matchFiles.isEmpty()) {
+            return ResponseEntity.badRequest().body(new NoSuchFileException("File could not be located"));
+        }
+
+        List<FileResponse> responses = matchFiles.stream()
+                .map(file -> FileResponse.builder()
+                        .fileName(file.getFileName())
+                        .fileType(file.getFileType())
+                        .build())
+                .toList();
+        return ResponseEntity.ok(responses);
     }
 }
