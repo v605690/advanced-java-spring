@@ -28,6 +28,7 @@ public class FileService {
     public FileResponse saveFile(MultipartFile multipartFile) throws Exception {
         validateMultiPartFile(multipartFile);
         final DatabaseFile savedFile = fileRepository.save(constructDatabaseFileFromMultiPart(multipartFile));
+
         return buildFileResponseFromDatabaseFile(savedFile);
     }
 

@@ -4,8 +4,12 @@ package com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.c
 import com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.models.DatabaseFile;
 import com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.models.FileResponse;
 import com.codingnomads.springweb.gettingdatafromclient.handlingmultipartdata.repositories.DatabaseFileRepository;
+
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,8 +24,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/images")
@@ -75,8 +77,8 @@ public class HandleMultipartDataController {
         }
     }
 
-    // @GetMapping("/download/{id}")
-    @GetMapping("/{id}")
+    @GetMapping("/download/{id}")
+    //@GetMapping("/{id}")
     public ResponseEntity<?> downloadFileById(@PathVariable(name = "id") Long fileId) {
 
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
@@ -100,8 +102,8 @@ public class HandleMultipartDataController {
                 .body(new ByteArrayResource(databaseFile.getData()));
     }
 
-    // @PutMapping("/uploadSingleFile/{id}")
-    @PutMapping("/{id}")
+    @PutMapping("/uploadSingleFile/{id}")
+    //@PutMapping("/{id}")
     public ResponseEntity<?> updateFileById(@PathVariable(name = "id") Long fileId, @RequestBody MultipartFile file) {
 
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
@@ -140,8 +142,8 @@ public class HandleMultipartDataController {
                 .build());
     }
 
-    // @DeleteMapping("/deleteFile/{id}")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteFile/{id}")
+    //@DeleteMapping("/{id}")
     public ResponseEntity<?> deleteFileById(@PathVariable("id") Long fileId) {
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
 
@@ -154,7 +156,7 @@ public class HandleMultipartDataController {
                 "File with ID " + fileId + " and name " + optional.get().getFileName() + " was deleted");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/searchFile/{id}")
     public ResponseEntity<?> searchFilesByName(@PathVariable("id") String searchTerm) {
         List<DatabaseFile> matchFiles = fileRepository.findByFileName(searchTerm);
 
@@ -169,5 +171,31 @@ public class HandleMultipartDataController {
                         .build())
                 .toList();
         return ResponseEntity.ok(responses);
+    }
+
+    @PostMapping("/duplicateFile/{id}")
+    public ResponseEntity<?> duplicateFile(@PathVariable("id") MultipartFile savedFile, String dupFile) throws IOException {
+
+       if (savedFile == null) {
+           return ResponseEntity.badRequest().body("No file was received");
+       }
+
+       try {
+
+       File tmpFile = File.createTempFile("dune", ".jpeg");
+       savedFile.transferTo(tmpFile);
+
+       File newFile = new File(tmpFile.getParent(), dupFile);
+
+        Files.copy(tmpFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        tmpFile.delete();
+
+        return ResponseEntity.ok(newFile);
+
+       } catch (IOException e) {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .body("Failed to duplicate file: " + e.getMessage());
+       }
     }
 }
