@@ -174,26 +174,36 @@ public class HandleMultipartDataController {
     }
 
     @PostMapping("/duplicateFile/{id}")
-    public ResponseEntity<?> duplicateFile(@PathVariable("id") MultipartFile savedFile, String dupFile) throws IOException {
+    public ResponseEntity<?> duplicateFile(@PathVariable("id") String savedFile, @RequestParam String dupFile) throws IOException {
+       List<DatabaseFile> copyFiles = fileRepository.findByFileName(savedFile);
 
-       if (savedFile == null) {
+       if (copyFiles == null) {
            return ResponseEntity.badRequest().body("No file was received");
        }
 
        try {
+           // get the first matching file
+           DatabaseFile copyFile = copyFiles.get(0);
 
-       File tmpFile = File.createTempFile("dune", ".jpeg");
-       savedFile.transferTo(tmpFile);
+           // create new DatabaseFile instance with copied data
+           DatabaseFile duplicatedFile = DatabaseFile.builder()
+                   .fileName(dupFile)
+                   .fileType(copyFile.getFileType())
+                   .data(copyFile.getData().clone())
+                   .build();
 
-       File newFile = new File(tmpFile.getParent(), dupFile);
+           // save the duplicated file to database
+           DatabaseFile savedDuplicatedFile = fileRepository.save(duplicatedFile);
 
-        Files.copy(tmpFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+           // return the response with the new file information
+           return ResponseEntity.ok(FileResponse.builder()
+                   .fileName(duplicatedFile.getFileName())
+                   .fileDownloadUri(duplicatedFile.getDownloadUrl())
+                   .fileType(duplicatedFile.getFileType())
+                   .size(duplicatedFile.getData().length)
+                   .build());
 
-        tmpFile.delete();
-
-        return ResponseEntity.ok(newFile);
-
-       } catch (IOException e) {
+       } catch (Exception e) {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                    .body("Failed to duplicate file: " + e.getMessage());
        }
