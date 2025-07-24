@@ -29,4 +29,17 @@ public class GreetingController {
         model.addAttribute("subjects", subjects);
         return "subjects";
     }
+
+    @GetMapping("/practice")
+    public String macSetup(Model model) {
+        model.addAttribute("Build");
+        model.addAttribute("Mac", "Macbook Air M3");
+        model.addAttribute("Keyboard", "Alice Keyboard");
+        model.addAttribute("Thunderbolt Dock", "CalDigit");
+        model.addAttribute("Mouse", "MX Master 2X");
+        model.addAttribute("ipad", "iPad Pro");
+        model.addAttribute("Monitor", "Tern Setup");
+
+        return "practice";
+    }
 }
