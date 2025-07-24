@@ -17,6 +17,11 @@ public class HomeController {
         model.addAttribute("name", "Developer");
         model.addAttribute("language", "Java");
         model.addAttribute("framework", "Spring");
+        model.addAttribute("container", "Docker");
+        model.addAttribute("frontend", "Javascript");
+        model.addAttribute("frameworkII", "Angular");
+        model.addAttribute("workflow", "CI/CD");
+
         return "model-page";
     }
 
@@ -28,7 +33,9 @@ public class HomeController {
         map.put("language", "Java");
         model.mergeAttributes(map);
 
-        model.addAttribute("framework", "Spring");
+       model.addAttribute("framework", "Spring");
+       model.addAttribute("container", "Docker");
+       model.addAttribute("frontend", "Javascript");
 
         return "model-page";
     }
