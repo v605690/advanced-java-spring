@@ -22,4 +22,22 @@ public class HomeController {
     public String greet() {
         return "Hello Back";
     }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test() {
+        return "This is a path test";
+    }
+
+    @GetMapping("/path")
+    public String test2(Model model) {
+        model.addAttribute("path", "Index path test");
+        return "greeting";
+    }
+
+    @GetMapping("/user")
+    @ResponseBody
+    public String test3() {
+        return "New user added";
+    }
 }

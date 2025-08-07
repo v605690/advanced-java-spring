@@ -2,6 +2,7 @@
 package com.codingnomads.springtest.usingmockmvc;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -48,5 +49,31 @@ public class TestWebServices {
                 .andDo(print())
                 // the view name expected is greeting
                 .andExpect(view().name("greeting"));
+    }
+
+    @Test
+    public void confirmStatus() throws Exception {
+        mockMvc
+                .perform(get("/"))
+                .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    public void returnView() throws Exception {
+        mockMvc
+                .perform(get("/user"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("New user added")));
+    }
+
+    @Test
+    public void testEndpointShouldReturnPathTestMessage() throws Exception {
+        mockMvc
+                .perform(get("/test"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("This is a path test"))
+                .andExpect(content().contentType("text/plain;charset=UTF-8"));
     }
 }
