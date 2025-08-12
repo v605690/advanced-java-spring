@@ -1,9 +1,10 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springtest.lab;
 
+import java.util.List;
+
 import com.codingnomads.springtest.TestUtil;
 import com.codingnomads.springtest.lab.entity.Movie;
-import com.codingnomads.springtest.lab.repository.MovieRepository;
 import com.codingnomads.springtest.lab.service.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
