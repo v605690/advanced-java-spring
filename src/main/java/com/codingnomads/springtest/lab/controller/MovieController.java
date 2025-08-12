@@ -5,9 +5,7 @@ import com.codingnomads.springtest.lab.entity.Movie;
 import com.codingnomads.springtest.lab.service.MovieService;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -19,5 +17,20 @@ public class MovieController {
     @GetMapping("/all")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
+    }
+
+    @GetMapping("/{name}")
+    public String getMovie(@PathVariable(name = "name") String name) {
+        return name;
+    }
+
+    @GetMapping("/rating")
+    public List<Movie> getMoviesByMinimumRating(@RequestParam("min") Double minRating) {
+        return movieService.getMoviesByMinimumRating(minRating);
+    }
+
+    @GetMapping("/ratings-only")
+    public List<Double> getRatingsByMinimumRating(@RequestParam("min") Double minRating) {
+        return movieService.getRatingsByMinimumRating(minRating);
     }
 }

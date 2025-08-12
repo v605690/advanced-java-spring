@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MovieService {
     List<Movie> getAllMovies();
+    List<Movie> getMoviesByMinimumRating(Double minRating);
+    List<Double> getRatingsByMinimumRating(Double minRating);
 }
