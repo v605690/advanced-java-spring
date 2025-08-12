@@ -53,6 +53,28 @@ public class MovieControllerTest {
     }
 
     @Test
+    public void testGetAllMovieByNumberRating() throws Exception {
+        mockMvc.perform(get("/ratings-only?min=8.0"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$[0]").value(9.3))
+                .andExpect(jsonPath("$[1]").value(8.0));
+    }
+
+    @Test
+    public void testGetAllMovieByRating() throws Exception {
+        mockMvc.perform(get("/rating?min=1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$[0].rating").value(9.3))
+                .andExpect(jsonPath("$[0].name").value("The Shawshank Redemption"))
+                .andExpect(jsonPath("$[1].rating").value(8.0))
+                .andExpect(jsonPath("$[1].name").value("The Pursuit of Happyness"));
+    }
+
+    @Test
     public void testGetAllMoviesFailure() throws Exception {
         mockMvc.perform(get("/all/3"))
                 .andDo(print())
