@@ -110,7 +110,7 @@ public class MovieControllerTest {
         Movie[] movies = TestUtil.convertJsonBytesToObject(responseContent, Movie[].class);
 
         assertThat(movies).hasSize(2);
-        assertThat(movies[0].getId()).isEqualTo(1);
+        assertThat(movies[0].getId()).isEqualTo(102L);
         assertThat(movies[0].getName()).isEqualTo("The Shawshank Redemption");
         assertThat(movies[0].getRating()).isEqualTo(9.3);
         assertThat(movies[1].getId()).isEqualTo(2);
