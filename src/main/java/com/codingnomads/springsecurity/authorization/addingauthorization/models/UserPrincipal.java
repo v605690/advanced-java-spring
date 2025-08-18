@@ -30,7 +30,7 @@ public class UserPrincipal implements UserDetails {
     @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private UserMeta userMeta;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "user_authority_join_table",
             joinColumns = @JoinColumn(name = "user_id"),
