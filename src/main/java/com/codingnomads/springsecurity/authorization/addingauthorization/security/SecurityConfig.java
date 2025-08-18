@@ -1,6 +1,7 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.springsecurity.authorization.addingauthorization.security;
 
+import com.codingnomads.springsecurity.authorization.addingauthorization.services.CustomUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -17,10 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, CustomUserService customUserService) throws Exception {
         http
                 // disable CSRF to allow Postman to interact with the application
                 .csrf(csrf -> csrf.disable())
+
+                .userDetailsService(customUserService)
                 // start changing endpoint authorization requirements
                 .authorizeHttpRequests(auth -> auth
                         // the following 4 paths should be allowed to all always. They are static and are required to
