@@ -37,6 +37,23 @@ public class HomeController {
         return "authorization/home";
     }
 
+    @GetMapping("/hr")
+    public String hrPage() {
+        return "authorization/hr";
+    }
+
+    @GetMapping("/resources")
+    public String resourcePage() {
+        return "authorization/resources";
+    }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "authorization/about";
+    }
+
+
+
     /*
        Method Security Annotations
 
