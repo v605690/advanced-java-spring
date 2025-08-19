@@ -3,12 +3,14 @@ package com.codingnomads.springsecurity.authorization.addingauthorization.contro
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
+@EnableMethodSecurity
 public class HomeController {
 
     @ModelAttribute
@@ -37,11 +39,13 @@ public class HomeController {
         return "authorization/home";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/hr")
     public String hrPage() {
         return "authorization/hr";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/resources")
     public String resourcePage() {
         return "authorization/resources";
