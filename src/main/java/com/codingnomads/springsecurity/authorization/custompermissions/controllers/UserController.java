@@ -35,4 +35,21 @@ public class UserController {
         userService.deleteUser(id);
         return ("deleted user with id: " + id);
     }
+
+    @GetMapping("/user1/{email}")
+    @ResponseBody
+    @PostAuthorize(
+            "hasPermission(#email, 'com.codingnomads.springsecurity.authorization.custompermissions.models.User', 'READ')")
+    public String readEntity(@PathVariable String email) {
+        userService.getUser("user1@email.com");
+        return ("retrieve email address of id: " + email);
+    }
+
+    @PatchMapping("/home")
+    @ResponseBody
+    @PreAuthorize(
+            "hasPermission(#email, 'com.codingnomads.springsecurity.authorization.custompermissions.models.User', 'UPDATE')")
+    public User updateEmail(@RequestParam String email) {
+        return userService.updateByEmail(email);
+    }
 }

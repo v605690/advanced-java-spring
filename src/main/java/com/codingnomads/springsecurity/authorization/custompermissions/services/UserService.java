@@ -19,4 +19,14 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public User updateByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            user.setEmail(email);
+        return userRepository.save(user);
+        }
+        return null;
+    }
 }
