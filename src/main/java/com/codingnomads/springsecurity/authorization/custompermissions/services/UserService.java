@@ -5,6 +5,7 @@ import com.codingnomads.springsecurity.authorization.custompermissions.models.Us
 import com.codingnomads.springsecurity.authorization.custompermissions.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -20,13 +21,20 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+    @Transactional
+    public User updateByEmail(String currentEmail, String newEmail) {
+        System.out.println("Looking for user with email: " + currentEmail);
+        User user = userRepository.findByEmail(currentEmail);
 
         if (user != null) {
-            user.setEmail(email);
-        return userRepository.save(user);
+            System.out.println("Found user, changing email from " + user.getEmail() + " to " + newEmail);
+            user.setEmail(newEmail);
+            User savedUser = userRepository.save(user);
+            System.out.println("User saved with new email: " + savedUser.getEmail());
+            return savedUser;
         }
-        return null;
+        System.out.println("User not found!");
+        throw new RuntimeException("User not found with email: " + currentEmail);
     }
+
 }

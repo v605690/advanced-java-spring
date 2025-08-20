@@ -48,12 +48,11 @@ public class UserController {
     @PatchMapping("/emails")
     @ResponseBody
     @PreAuthorize(
-            "hasPermission(#email, 'com.codingnomads.springsecurity.authorization.custompermissions.models.User', 'UPDATE')")
-    public User updateEmail(@RequestParam String email) {
-        User user = userService.getUser(email);
-        if (user == null) {
-            throw new RuntimeException("User not found with email: " + email);
-        }
-        return userService.updateByEmail(email);
+            "hasPermission(#currentEmail, 'com.codingnomads.springsecurity.authorization.custompermissions.models.User', 'UPDATE')")
+    public User updateEmail(@RequestParam  String currentEmail, @RequestParam String newEmail) {
+        System.out.println("Current Email: " + currentEmail);
+        System.out.println("New Email: " + newEmail);
+
+        return userService.updateByEmail(currentEmail, newEmail);
     }
 }
