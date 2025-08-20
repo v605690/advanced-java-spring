@@ -45,11 +45,15 @@ public class UserController {
         return ("retrieve email address of id: " + email);
     }
 
-    @PatchMapping("/home")
+    @PatchMapping("/emails")
     @ResponseBody
     @PreAuthorize(
             "hasPermission(#email, 'com.codingnomads.springsecurity.authorization.custompermissions.models.User', 'UPDATE')")
     public User updateEmail(@RequestParam String email) {
+        User user = userService.getUser(email);
+        if (user == null) {
+            throw new RuntimeException("User not found with email: " + email);
+        }
         return userService.updateByEmail(email);
     }
 }
