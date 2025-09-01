@@ -1,6 +1,8 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.aspectorientedprogramming.aop.service;
 
+import com.codingnomads.aspectorientedprogramming.aop.aspect.Loggable;
+import com.codingnomads.aspectorientedprogramming.aop.aspect.TrackMethodExecutionTime;
 import com.codingnomads.aspectorientedprogramming.aop.model.Student;
 import com.codingnomads.aspectorientedprogramming.aop.repository.StudentRepository;
 import java.util.List;
@@ -17,14 +19,14 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    // @TrackMethodExecutionTime
-    // @Loggable
+    @TrackMethodExecutionTime
+    @Loggable
     public List<Student> fetchAllStudents() {
         return studentRepository.findAll();
     }
 
-    // @TrackMethodExecutionTime
-    // @Loggable
+    @TrackMethodExecutionTime
+    @Loggable
     public void saveAllStudents(List<Student> students) {
         studentRepository.saveAll(students);
     }
