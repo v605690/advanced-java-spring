@@ -22,6 +22,10 @@ public class AOPDemo implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        studentService.saveStudent(
+                Student.builder().name("Larry").email("larry@gmail.com")
+                        .build());
+
         studentService.saveAllStudents(Arrays.asList(
                 Student.builder().email("student1@example.com").name("student1").build(),
                 Student.builder().email("student2@example.com").name("student2").build(),

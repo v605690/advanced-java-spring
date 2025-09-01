@@ -1,6 +1,7 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.aspectorientedprogramming.aop.aspect;
 
+import com.codingnomads.aspectorientedprogramming.aop.service.StudentService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -13,8 +14,18 @@ public class ServiceAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceAspect.class);
 
-    @Pointcut(value = "execution(* com.codingnomads.aspectorientedprogramming.aop.service.StudentService.*(..))")
+    @Pointcut(value = "execution(* com.codingnomads.aspectorientedprogramming.aop.service.StudentService.saveStudent(..))")
     private void logAllStudentServiceMethods() {}
+
+    @Before("execution(* com.codingnomads.aspectorientedprogramming.aop.service.StudentService.saveStudent(..))")
+    public void logSaveStudent(JoinPoint joinPoint) {
+        LOGGER.info("Starting to save student: " + joinPoint.getSignature());
+    }
+
+    @After("execution(* com.codingnomads.aspectorientedprogramming.aop.service.StudentService.saveStudent())")
+    public void logSaveStudentMethodCompleted(JoinPoint joinPoint) {
+        LOGGER.info("New Student saved: " + joinPoint.getSignature().getName());
+    }
 
     @Before("logAllStudentServiceMethods()")
     public void logBeforeAdvice(JoinPoint joinPoint) {
