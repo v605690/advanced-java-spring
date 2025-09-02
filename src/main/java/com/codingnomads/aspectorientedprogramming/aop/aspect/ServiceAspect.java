@@ -52,6 +52,7 @@ public class ServiceAspect {
         LOGGER.info("Result: = " + students);
     }
 
+
     @After("logAllStudentServiceMethods()")
     public void logStudentServiceMethod(JoinPoint joinPoint) {
         LOGGER.info("New Student saved: " + joinPoint.getSignature().getName());
