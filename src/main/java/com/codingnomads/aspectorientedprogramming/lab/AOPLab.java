@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {BatchAutoConfiguration.class, SpringDataWebAutoConfiguration.class})
 @RequiredArgsConstructor
 public class AOPLab implements CommandLineRunner {
 
@@ -20,5 +22,6 @@ public class AOPLab implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         greetingService.greeting();
+        greetingService.greetByName("Pravin");
     }
 }

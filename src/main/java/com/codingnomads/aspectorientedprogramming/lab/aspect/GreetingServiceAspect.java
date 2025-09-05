@@ -22,23 +22,20 @@ public class GreetingServiceAspect {
 
     @Before("greetingMethodByName()")
     public void logBeforeGreetingName(JoinPoint joinPoint) {
-        System.out.println("Before greeting method  by name execution: " + joinPoint.getSignature());
+        System.out.println("Run @before greeting method by name: " + joinPoint.getSignature());
     }
 
     @AfterReturning("greetingMethod()")
     public void logAfterReturning(JoinPoint joinPoint) {
-        System.out.println("After Returning");
+        System.out.println("Run @After Returning");
     }
 
     @After("greetingMethod()")
-    public void logAfterGreeting(JoinPoint joinPoint) {
-        System.out.println("After greeting method execution: " + joinPoint.getSignature().getName());
+    public void logAfterGreetingName(JoinPoint joinPoint) {
+        System.out.println("Run @After greeting method by name: " + joinPoint.getSignature().getName());
     }
     @After("greetingMethodByName()")
     public void logAfterGreetingByName(JoinPoint joinPoint) {
-        System.out.println("After greeting method by name execution: " + joinPoint.getSignature().getName());
+        System.out.println("Run @After greeting method by name execution: " + joinPoint.getSignature().getName());
     }
-
-
-
 }
