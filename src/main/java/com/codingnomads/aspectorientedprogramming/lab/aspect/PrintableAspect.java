@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrintableAspect {
 
-    @Pointcut(value = "@annotation(com.codingnomads.aspectorientedprogramming.lab.customannotation.Printable)")
-    private void printMethod() {}
+    @Pointcut("@annotation(Printable)")
+    private void pointCut() {}
 
-    @Before("printMethod()")
+    @Before("pointCut()")
     public void logBeforePrint(JoinPoint joinPoint) {
         System.out.println("Execute a @Printable method: " + joinPoint.getSignature().getName());
     }
 
-    @After("printMethod()")
+    @After("pointCut()")
     public void logAfterPrint(JoinPoint joinPoint) {
         System.out.println("Finished executing @Printable method: " + joinPoint.getSignature().getName());
     }

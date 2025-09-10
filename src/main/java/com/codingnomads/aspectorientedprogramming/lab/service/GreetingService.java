@@ -1,7 +1,7 @@
 /* CodingNomads (C)2024 */
 package com.codingnomads.aspectorientedprogramming.lab.service;
 
-import com.codingnomads.aspectorientedprogramming.lab.customannotation.Printable;
+import com.codingnomads.aspectorientedprogramming.lab.aspect.Printable;
 import org.springframework.stereotype.Service;
 
 @Service

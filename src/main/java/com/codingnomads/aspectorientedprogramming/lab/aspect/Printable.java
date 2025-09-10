@@ -1,4 +1,4 @@
-package com.codingnomads.aspectorientedprogramming.lab.customannotation;
+package com.codingnomads.aspectorientedprogramming.lab.aspect;
 
 
 import java.lang.annotation.ElementType;

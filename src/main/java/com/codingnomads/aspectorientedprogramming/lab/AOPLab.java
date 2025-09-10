@@ -22,6 +22,6 @@ public class AOPLab implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         greetingService.greeting();
-        greetingService.greetByName("Pravin");
+        System.out.println(greetingService.greetByName("Pravin"));
     }
 }
